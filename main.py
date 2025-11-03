@@ -3,13 +3,20 @@ SaaS Generator v3 - Refactored Architecture
 Point d'entrée FastAPI avec architecture modulaire propre
 """
 import logging
+import asyncio
+import sys
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.core.config import get_settings
 from app.api.routers import router
+
+# Fix asyncio event loop pour Windows (support subprocess)
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 
 # Configuration du logging
 logging.basicConfig(
@@ -32,17 +39,17 @@ async def lifespan(app: FastAPI):
     Exécuté au démarrage et à l'arrêt
     """
     # Startup
-    logger.info(f"🚀 Démarrage de {settings.app_title} v{settings.app_version}")
-    logger.info(f"📁 Répertoire de sortie: {settings.output_dir}")
-    logger.info(f"🤖 Modèle d'agent: {settings.agent_model}")
-    logger.info(f"🔑 Anthropic API: {'✅ Configurée' if settings.anthropic_api_key else '❌ Manquante'}")
-    logger.info(f"🔑 GitHub Token: {'✅ Configuré' if settings.github_token else '❌ Manquant'}")
-    logger.info(f"🔑 Vercel Token: {'✅ Configuré' if settings.vercel_token else '❌ Manquant'}")
+    logger.info(f"Demarrage de {settings.app_title} v{settings.app_version}")
+    logger.info(f"Repertoire de sortie: {settings.output_dir}")
+    logger.info(f"Modele d'agent: {settings.agent_model}")
+    logger.info(f"Anthropic API: {'OK Configuree' if settings.anthropic_api_key else 'KO Manquante'}")
+    logger.info(f"GitHub Token: {'OK Configure' if settings.github_token else 'KO Manquant'}")
+    logger.info(f"Vercel Token: {'OK Configure' if settings.vercel_token else 'KO Manquant'}")
 
     yield
 
     # Shutdown
-    logger.info(f"🛑 Arrêt de {settings.app_title}")
+    logger.info(f"Arret de {settings.app_title}")
 
 
 # Créer l'application FastAPI
@@ -63,6 +70,9 @@ app.add_middleware(
 
 # Enregistrer les routers
 app.include_router(router, prefix="/api")
+
+# Servir les fichiers statiques (frontend)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/")

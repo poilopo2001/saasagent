@@ -14,9 +14,6 @@ from claude_code_sdk import ClaudeSDKClient, ClaudeCodeOptions
 from app.core.config import get_settings
 from app.services.job_manager import job_manager
 from app.agents.modular import SetupAgent, ComponentAgent, SectionAgent, PageAgent, ContentAgent
-from app.agents.site_validator import SiteValidatorAgent
-from app.agents.github_publisher import GitHubPublisherAgent
-from app.agents.vercel_deployer import VercelDeployerAgent
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
