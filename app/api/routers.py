@@ -66,7 +66,7 @@ IMPORTANT:
 - Utilise null si une info n'est pas dans la description"""
 
         message = client.messages.create(
-            model="claude-3-5-haiku-20241022",
+            model="claude-sonnet-4-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}]
         )
