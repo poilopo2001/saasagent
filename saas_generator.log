@@ -1,0 +1,140 @@
+2025-11-03 16:38:49,065 - main - INFO - Demarrage de SaaS Generator v3 API v3.0.0-modular
+2025-11-03 16:38:49,065 - main - INFO - Repertoire de sortie: ./tmp/generated-sites
+2025-11-03 16:38:49,065 - main - INFO - Modele d'agent: claude-sonnet-4-20250514
+2025-11-03 16:38:49,065 - main - INFO - Anthropic API: OK Configuree
+2025-11-03 16:38:49,065 - main - INFO - GitHub Token: OK Configure
+2025-11-03 16:38:49,066 - main - INFO - Vercel Token: OK Configure
+2025-11-03 16:47:30,232 - main - INFO - Demarrage de SaaS Generator v3 API v3.0.0-modular
+2025-11-03 16:47:30,232 - main - INFO - Repertoire de sortie: ./tmp/generated-sites
+2025-11-03 16:47:30,235 - main - INFO - Modele d'agent: claude-sonnet-4-20250514
+2025-11-03 16:47:30,236 - main - INFO - Anthropic API: OK Configuree
+2025-11-03 16:47:30,236 - main - INFO - GitHub Token: OK Configure
+2025-11-03 16:47:30,236 - main - INFO - Vercel Token: OK Configure
+2025-11-03 16:57:02,722 - app.services.job_manager - INFO - Job créé: job_20251103_165702 pour plomberie-martin--hesperange
+2025-11-03 16:57:02,754 - app.services.generator_modular - ERROR - Erreur génération job job_20251103_165702: Failed to start Claude Code: 
+Traceback (most recent call last):
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\_internal\transport\subprocess_cli.py", line 200, in connect
+    self._process = await anyio.open_process(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\anyio\_core\_subprocesses.py", line 190, in open_process
+    return await get_async_backend().open_process(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2588, in open_process
+    process = await asyncio.create_subprocess_exec(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\subprocess.py", line 224, in create_subprocess_exec
+    transport, protocol = await loop.subprocess_exec(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        stderr=stderr, **kwds)
+        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 1802, in subprocess_exec
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        protocol, popen_args, False, stdin, stdout, stderr,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        bufsize, **kwargs)
+        ^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 539, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 67, in run_generation_workflow
+    await GeneratorServiceModular._phase1_setup(job_id, business_data, site_slug, site_dir)
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 157, in _phase1_setup
+    await GeneratorServiceModular._execute_phase(
+    ...<2 lines>...
+    )
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 142, in _execute_phase
+    async with ClaudeSDKClient(options=options) as client:
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\client.py", line 271, in __aenter__
+    await self.connect()
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\client.py", line 122, in connect
+    await self._transport.connect()
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\_internal\transport\subprocess_cli.py", line 236, in connect
+    raise error from e
+claude_code_sdk._errors.CLIConnectionError: Failed to start Claude Code: 
+2025-11-03 16:57:02,769 - app.services.job_manager - INFO - Job job_20251103_165702 mis à jour: failed (0%) - Échec: Failed to start Claude Code: 
+2025-11-03 16:57:53,466 - main - INFO - Demarrage de SaaS Generator v3 API v3.0.0-modular
+2025-11-03 16:57:53,466 - main - INFO - Repertoire de sortie: ./tmp/generated-sites
+2025-11-03 16:57:53,466 - main - INFO - Modele d'agent: claude-sonnet-4-20250514
+2025-11-03 16:57:53,466 - main - INFO - Anthropic API: OK Configuree
+2025-11-03 16:57:53,466 - main - INFO - GitHub Token: OK Configure
+2025-11-03 16:57:53,466 - main - INFO - Vercel Token: OK Configure
+2025-11-03 16:59:03,620 - app.services.job_manager - INFO - Job créé: job_20251103_165903 pour plomberie-martin-hesperange
+2025-11-03 16:59:03,629 - app.services.generator_modular - ERROR - Erreur génération job job_20251103_165903: Failed to start Claude Code: 
+Traceback (most recent call last):
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\_internal\transport\subprocess_cli.py", line 200, in connect
+    self._process = await anyio.open_process(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\anyio\_core\_subprocesses.py", line 190, in open_process
+    return await get_async_backend().open_process(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2588, in open_process
+    process = await asyncio.create_subprocess_exec(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\subprocess.py", line 224, in create_subprocess_exec
+    transport, protocol = await loop.subprocess_exec(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        stderr=stderr, **kwds)
+        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 1802, in subprocess_exec
+    transport = await self._make_subprocess_transport(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        protocol, popen_args, False, stdin, stdout, stderr,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        bufsize, **kwargs)
+        ^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 539, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 67, in run_generation_workflow
+    await GeneratorServiceModular._phase1_setup(job_id, business_data, site_slug, site_dir)
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 157, in _phase1_setup
+    await GeneratorServiceModular._execute_phase(
+    ...<2 lines>...
+    )
+  File "C:\Users\sebas\saas\saasagent\app\services\generator_modular.py", line 142, in _execute_phase
+    async with ClaudeSDKClient(options=options) as client:
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\client.py", line 271, in __aenter__
+    await self.connect()
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\client.py", line 122, in connect
+    await self._transport.connect()
+  File "C:\Users\sebas\AppData\Roaming\Python\Python313\site-packages\claude_code_sdk\_internal\transport\subprocess_cli.py", line 236, in connect
+    raise error from e
+claude_code_sdk._errors.CLIConnectionError: Failed to start Claude Code: 
+2025-11-03 16:59:03,631 - app.services.job_manager - INFO - Job job_20251103_165903 mis à jour: failed (0%) - Échec: Failed to start Claude Code: 
+2025-11-03 19:21:26,432 - main - INFO - Demarrage de SaaS Generator v3 API v3.0.0-modular
+2025-11-03 19:21:26,433 - main - INFO - Repertoire de sortie: ./tmp/generated-sites
+2025-11-03 19:21:26,433 - main - INFO - Modele d'agent: claude-sonnet-4-20250514
+2025-11-03 19:21:26,433 - main - INFO - Anthropic API: OK Configuree
+2025-11-03 19:21:26,433 - main - INFO - GitHub Token: OK Configure
+2025-11-03 19:21:26,433 - main - INFO - Vercel Token: OK Configure

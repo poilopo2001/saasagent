@@ -9,7 +9,7 @@ import logging
 from typing import Dict, Any
 from datetime import datetime
 
-from claude_code_sdk import ClaudeSDKClient, ClaudeCodeOptions
+from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
 
 from app.core.config import get_settings
 from app.services.job_manager import job_manager
@@ -130,12 +130,13 @@ class GeneratorServiceModular:
         # Générer le prompt via l'agent spécialisé
         prompt = agent_class.get_prompt(business_data, site_slug, site_dir)
 
-        # Configuration Claude Code SDK
-        options = ClaudeCodeOptions(
+        # Configuration Claude Agent SDK
+        options = ClaudeAgentOptions(
             model=settings.agent_model,
             allowed_tools=["Write", "Read", "Edit", "Bash"],
             permission_mode="acceptEdits",
-            cwd=site_dir
+            cwd=site_dir,
+            system_prompt={"type": "preset", "preset": "claude_code"}
         )
 
         # Exécution
@@ -232,11 +233,12 @@ class GeneratorServiceModular:
         """Exécute la validation du site"""
         prompt = SiteValidatorAgent.get_validation_prompt(site_dir, attempt, max_attempts)
 
-        options = ClaudeCodeOptions(
+        options = ClaudeAgentOptions(
             model=settings.agent_model,
             allowed_tools=["Read", "Grep", "Glob", "Bash"],
             permission_mode="acceptEdits",
-            cwd=site_dir
+            cwd=site_dir,
+            system_prompt={"type": "preset", "preset": "claude_code"}
         )
 
         validation_report = ""
@@ -268,11 +270,12 @@ class GeneratorServiceModular:
 
         prompt = SiteValidatorAgent.get_fix_prompt(site_dir, validation_report, attempt)
 
-        options = ClaudeCodeOptions(
+        options = ClaudeAgentOptions(
             model=settings.agent_model,
             allowed_tools=["Write", "Read", "Edit", "Bash"],
             permission_mode="acceptEdits",
-            cwd=site_dir
+            cwd=site_dir,
+            system_prompt={"type": "preset", "preset": "claude_code"}
         )
 
         async with ClaudeSDKClient(options=options) as client:
@@ -304,12 +307,13 @@ class GeneratorServiceModular:
 
         prompt = GitHubPublisherAgent.get_prompt(payload)
 
-        options = ClaudeCodeOptions(
+        options = ClaudeAgentOptions(
             model=settings.agent_model,
             allowed_tools=["Bash", "Read", "Edit"],
             permission_mode="acceptEdits",
             cwd=site_dir,
-            env={"GH_TOKEN": settings.github_token or ""}
+            env={"GH_TOKEN": settings.github_token or ""},
+            system_prompt={"type": "preset", "preset": "claude_code"}
         )
 
         github_url = None
@@ -366,12 +370,13 @@ class GeneratorServiceModular:
 
         prompt = VercelDeployerAgent.get_prompt(payload)
 
-        options = ClaudeCodeOptions(
+        options = ClaudeAgentOptions(
             model=settings.agent_model,
             allowed_tools=["Bash", "Read", "Edit"],
             permission_mode="acceptEdits",
             cwd=site_dir,
-            env={"VERCEL_TOKEN": settings.vercel_token or ""}
+            env={"VERCEL_TOKEN": settings.vercel_token or ""},
+            system_prompt={"type": "preset", "preset": "claude_code"}
         )
 
         vercel_url = None
